@@ -15,8 +15,8 @@ SECRET_KEY = os.environ.get(
 )
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['.up.railway.app', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://*.up.railway.app']
+ALLOWED_HOSTS = ['.up.railway.app', '.onrender.com', 'localhost', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.up.railway.app', 'https://*.onrender.com']
 
 # Custom domain ho to Railway variable me add karo: CUSTOM_DOMAIN=www.yoursite.com
 CUSTOM_DOMAIN = os.environ.get('CUSTOM_DOMAIN')
