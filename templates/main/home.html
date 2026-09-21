@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <div class="hero-avatar">
+            <div class="avatar-ring"></div>
+            <div class="avatar-inner">
+                <span class="avatar-text">TA</span>
+            </div>
+        </div>
+        <h1 class="hero-title">Hi, I'm <span class="text-accent">Tauqeer Alam</span></h1>
+        <p class="hero-subtitle">Python Full Stack Developer</p>
+        <p class="hero-tagline">Building scalable web applications with Django & modern technologies</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View My Work</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat"><span class="stat-num">2</span><span class="stat-label">Projects</span></div>
+            <div class="stat"><span class="stat-num">1</span><span class="stat-label">Experience</span></div>
+            <div class="stat"><span class="stat-num">4+</span><span class="stat-label">Tech Skills</span></div>
+        </div>
+    </div>
+    {% comment %} <div class="hero-scroll">
+        <div class="mouse"><div class="wheel"></div></div>
+        <span>Scroll</span>
+    </div> {% endcomment %}
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title">About <span class="text-accent">Me</span></h2>
+        <div class="about-grid">
+            <div class="about-card reveal">
+                <div class="about-icon"><i class="fas fa-code"></i></div>
+                <h3>Full Stack Developer</h3>
+                <p>Passionate Python developer specializing in Django with hands-on experience in building end-to-end web applications. Strong understanding of backend architecture, database design, and REST APIs.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Problem Solver</h3>
+                <p>Detail-oriented and motivated to solve real-world problems through clean, efficient code. Passionate about building scalable applications that make a difference.</p>
+            </div>
+            <div class="about-card reveal">
+                <div class="about-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Continuous Learner</h3>
+                <p>Currently pursuing Python Full Stack training at QSpiders. Always exploring new technologies and improving development skills.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="section bg-dark">
+    <div class="container">
+        <h2 class="section-title">My <span class="text-accent">Skills</span></h2>
+        <div class="skills-grid">
+            {% for skill in skills %}
+            <div class="skill-card reveal" data-category="{{ skill.category }}">
+                <div class="skill-icon">
+                    {% if skill.image %}
+                    <img src="{{ skill.image.url }}" alt="{{ skill.name }}" class="skill-img">
+                    {% else %}
+                    <span>{{ skill.icon|default:'🛠️' }}</span>
+                    {% endif %}
+                </div>
+                <h4>{{ skill.name }}</h4>
+                <div class="skill-bar">
+                    <div class="skill-fill" data-width="{{ skill.proficiency }}"></div>
+                </div>
+                <span class="skill-pct">{{ skill.proficiency }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="section">
+    <div class="container">
+        <h2 class="section-title">Featured <span class="text-accent">Projects</span></h2>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card reveal {% if project.featured %}featured{% endif %}">
+                <div class="project-image">
+                    <div class="project-gradient"></div>
+                    <div class="project-icon"><i class="{% if project.featured %}fas fa-star{% else %}fas fa-code-branch{% endif %}"></i></div>
+                </div>
+                <div class="project-content">
+                    <div class="project-tag">{{ project.tech_list|first }}</div>
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description|truncatewords:25 }}</p>
+                    <ul class="project-features">
+                        {% for feature in project.features|split:"\n" %}
+                        <li><i class="fas fa-check"></i> {{ feature|strip }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="project-tech">
+                        {% for tech in project.tech_list %}
+                        <span class="tech-tag">{{ tech|strip }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="project-links">
+                        {% if project.demo_url %}
+                        <a href="{{ project.demo_url }}" target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        {% endif %}
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section id="education" class="section bg-dark">
+    <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+            {% for edu in education %}
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-period">{{ edu.period }}</span>
+                    <h3>{{ edu.degree }}</h3>
+                    <h4 class="text-accent">{{ edu.institution }}</h4>
+                    {% if edu.cgpa %}<span class="cgpa">CGPA: {{ edu.cgpa }}</span>{% endif %}
+                    <p>{{ edu.description }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="section">
+    <div class="container">
+        <h2 class="section-title">Work <span class="text-accent">Experience</span></h2>
+        <div class="timeline">
+            {% for exp in experience %}
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="timeline-period">{{ exp.period }}</span>
+                    <h3>{{ exp.role }}</h3>
+                    <h4 class="text-accent">{{ exp.company }} — {{ exp.location }}</h4>
+                    <p>{{ exp.description }}</p>
+                    {% if exp.achievements %}
+                    <ul class="achievements">
+                        {% for ach in exp.achievements|split:"\n" %}
+                        <li><i class="fas fa-arrow-right"></i> {{ ach|strip }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section bg-dark">
+    <div class="container">
+        <h2 class="section-title">Get In <span class="text-accent">Touch</span></h2>
+        <div class="contact-grid">
+            <div class="contact-card reveal">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <h4>Email</h4>
+                <p><a href="mailto:tauqeeralam7401@gmail.com">tauqeeralam7401@gmail.com</a></p>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                <h4>Phone</h4>
+                <p><a href="tel:7079906220">+91 7079906220</a></p>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h4>Location</h4>
+                <p>Darbhanga, Bihar</p>
+            </div>
+            <div class="contact-card reveal">
+                <div class="contact-icon"><i class="fab fa-github"></i></div>
+                <h4>GitHub</h4>
+                <p><a href="https://github.com/alam7401" target="_blank">github.com/alam7401</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    {% for project in projects %}
+    {% endfor %}
+});
+</script>
+{% endblock %}
