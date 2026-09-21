@@ -10,7 +10,7 @@
         <div class="hero-avatar">
             <div class="avatar-ring"></div>
             <div class="avatar-inner">
-                <span class="avatar-text">TA</span>
+                <img src="{% static 'images/image.webp' %}" alt="Tauqeer Alam" class="avatar-img">
             </div>
         </div>
         <h1 class="hero-title">Hi, I'm <span class="text-accent">Tauqeer Alam</span></h1>
@@ -21,7 +21,7 @@
             <a href="#contact" class="btn btn-outline">Contact Me</a>
         </div>
         <div class="hero-stats">
-            <div class="stat"><span class="stat-num">2</span><span class="stat-label">Projects</span></div>
+            <div class="stat"><span class="stat-num">3</span><span class="stat-label">Projects</span></div>
             <div class="stat"><span class="stat-num">1</span><span class="stat-label">Experience</span></div>
             <div class="stat"><span class="stat-num">4+</span><span class="stat-label">Tech Skills</span></div>
         </div>
@@ -86,11 +86,30 @@
     <div class="container">
         <h2 class="section-title">Featured <span class="text-accent">Projects</span></h2>
         <div class="projects-grid">
+            <!-- Resume Download Card -->
+            <div class="project-card reveal featured">
+                <div class="project-image">
+                    <div class="project-gradient"></div>
+                    <div class="project-icon"><i class="fa fa-file-pdf-o"></i></div>
+                </div>
+                <div class="project-content">
+                    <span class="project-tag">PDF</span>
+                    <h3>Resume — Tauqeer Alam</h3>
+                    <p>Download my full resume as a PDF document. Includes projects, experience, education, and skills.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">PDF</span>
+                        <span class="tech-tag">Django</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="{% url 'resume_download' %}" target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> Download PDF<i class="fa fa-file-pdf-o"></i></a>
+                    </div>
+                </div>
+            </div>
             {% for project in projects %}
             <div class="project-card reveal {% if project.featured %}featured{% endif %}">
                 <div class="project-image">
                     <div class="project-gradient"></div>
-                    <div class="project-icon"><i class="{% if project.featured %}fas fa-star{% else %}fas fa-code-branch{% endif %}"></i></div>
+                    <div class="project-icon"><i class="fa-solid fa-list-check"></i></div>
                 </div>
                 <div class="project-content">
                     <div class="project-tag">{{ project.tech_list|first }}</div>
