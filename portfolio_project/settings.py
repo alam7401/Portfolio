@@ -77,8 +77,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "portfolio_project.wsgi.application"
 
 # ---------- Database ----------
-# Local: db.sqlite3
-# Render: /var/data/db.sqlite3 (set SQLITE_DB_PATH in Render Environment)
+# SQLite on Render: set SQLITE_DB_PATH=/var/data/db.sqlite3 and attach a
+# Persistent Disk (1 GB free) mounted at /var/data so data survives deploys.
+# Local: falls back to db.sqlite3
 SQLITE_DB_PATH = Path(
     os.environ.get("SQLITE_DB_PATH", str(BASE_DIR / "db.sqlite3"))
 )
